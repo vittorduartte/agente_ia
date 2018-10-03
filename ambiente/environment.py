@@ -1,25 +1,31 @@
 import os
-
-
-
-matrizB = [[1,2,3],[4,5,6],[7,8,9]]
+import random
 
 class Environment:
     
-    def __init__(self, matrix):
-        self.matrix = matrix
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
     
-    def get_Position(self):
-        # for line in range(len(self.matrix)):
-        #     for element in range(len(self.matrix[line])):
-        #         print (self.matrix[line][element])
+    def generate_Environment(self):
+        
+        environment = []
+
+        for i in range(self.length):
+            listaux = []
+            for j in range(self.width):
+                listaux.append(random.randrange(2))
+            environment.append(listaux)
+
+        return environment
     
-env = Environment(matrizB)
-print(env.get_Position())
 
+# env = Environment(10,10).generate_Environment()
 
+# for i in range(len(env)):
+#     for j in range(len(env[i])):
+#         if env[i][j] == 0:
+#             print('[Linha: ', i+1, ' - Coluna: ',j+1,', Limpo]\n')
+#         else:
+#             print('[Linha: ', i+1, ' - Coluna: ',j+1,', Sujo]\n')
 
-
-
-# file.writelines(str(lista))
-# file.close()
