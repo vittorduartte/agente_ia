@@ -53,9 +53,10 @@ class Actuator:
     def __init__(self, env):
         self.env = env
         
-    def clean_Here(self, here):
-        self.env[here] = 0
-        return self.env
+    def clean_Here(self, line, column):
+        output = self.env.as_List()
+        output[line][column] = 0
+        return output
 
 class Agent:
 
@@ -65,22 +66,21 @@ class Agent:
 
     def now_Alive(self):
 
-        for line in range(len(self.sensor.world_visible)):
+        for line in range(len(self.sensor.world_visible.as_List())):
             
-            for column in range(len(self.sensor.world_visible[line])):
+            for column in range(len(self.sensor.world_visible.as_List()[line])):
 
-                    if self.sensor.current_State(self.sensor.world_visible[line][column]):
+                if self.sensor.current_State(self.sensor.world_visible.as_List()[line][column]):
                         
-                        self.actuator.clean_Here(self.environment[line][column])
-                        
-                        self.
+                    now = self.actuator.clean_Here(line,column) 
+                    self.sensor.world_visible.whats_Is_Newest(now)
+                    self.actuator.env.whats_Is_Newest(now)
 
-                    
-                    else:
+                else:
 
-                        result = self.actuator.next_Frame(self.environment[line][column])
-
-        return result
+                    pass
+    
+        return self.sensor.world_visible.view_All_States()
 
     # def generate_Log_Status(list_state):
     #     now = datetime.now()
