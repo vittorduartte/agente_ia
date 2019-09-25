@@ -1,3 +1,7 @@
 {
-    "python.pythonPath": "/home/vittorduartte/.local/share/virtualenvs/agentesintel-m4iOUk4N/bin/python"
+    "python.pythonPath": "/home/vittorduartte/.local/share/virtualenvs/agentesintel-m4iOUk4N/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.mypyEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pep8Enabled": false
 }
