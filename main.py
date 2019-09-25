@@ -1,10 +1,9 @@
-from ambiente import environment as env
-from agente import agente as agt
+from environment.environment import Environment as Ambiente
+from agent.agent import Agent as Agente
+from agent.actuator import Actuator as Atuador
+from agent.sensor import Sensor as Sensor
 
-ambiente = env.Environment(4,4).generate_Environment()
+Ambiente = Ambiente(6,6)
+Agente = Agente(Sensor(), Atuador())
 
-agente = agt.Agente( ambiente, 
-agt.Sensor(ambiente),
-agt.Actuator(ambiente) )
-
-result = agente.in_activity()
+Agente.now_Alive(Ambiente)

@@ -1,91 +1,30 @@
 import os
 from datetime import datetime 
 
- #   def analisa_Estados(self):
-        
-    #     list_state = []
-
-    #     for line in range(len(self.environment)):
-            
-    #         for column in range(len(self.environment[line])):
-                
-    #             if  self.environment[line][column] == 0:
-                    
-    #                 aux = self.environment[line][column]
-    #                 self.environment[line][column] = 'x'
-
-    #                 # log = '[ Posição: ' + str(line) +' x '+str(column)+' - '+' Limpo ]'
-    #                 # list_state.append(log)
-
-    #                 print(self.environment)
-    #                 self.environment[line][column] = aux                      
-                    
-    #             else:
-
-    #                 aux = self.environment[line][column]
-    #                 self.environment[line][column] = 'x'
-
-    #                 # log = '[ Posição: ' + str(line) +' x '+str(column)+' - '+' Sujo ]'
-    #                 # list_state.append(log)
-                    
-    #                 print(self.environment)
-    #                 self.environment[line][column] = aux
-                    
-
-    #     return list_state
-
-class Sensor:
-    
-    def __init__(self, world_visible):
-        self.world_visible = world_visible
-
-    def current_State(self, right_now):
-        
-        if right_now == 0:
-            return False
-
-        else:
-            return True
-
-
-class Actuator:
-
-    def __init__(self, env):
-        self.env = env
-        
-    def clean_Here(self, line, column):
-        output = self.env.as_List()
-        output[line][column] = 0
-        return output
-
 class Agent:
 
     def __init__(self, sensor, actuator):
         self.sensor = sensor
         self.actuator = actuator
 
-    def now_Alive(self):
+    def now_Alive(self, env):
 
-        for line in range(len(self.sensor.world_visible.as_List())):
+        for line in range(len(env.as_List())):
             
-            for column in range(len(self.sensor.world_visible.as_List()[line])):
+            for column in range(len(env.as_List()[line])):
 
-                if self.sensor.current_State(self.sensor.world_visible.as_List()[line][column]):
-                        
-                    now = self.actuator.clean_Here(line,column) 
-                    self.sensor.world_visible.whats_Is_Newest(now)
-                    self.actuator.env.whats_Is_Newest(now)
-
+                if self.sensor.current_State(env.as_List()[line][column]):
+                    
+                    print('Estado Atual: SUJO')
+                    print('\nLocal: ' + str(line+1) + 'x' + str(column+1) + '\nAção: LIMPAR')
+                    now = self.actuator.clean_Here(line, column, env)
+                    env.update_Now(now)
+                    
                 else:
-
+                    print('Estado Atual: LIMPO')
+                    print('\nLocal: ' + str(line+1) + 'x' + str(column+1) + '\nAção: MOVER')
                     pass
-    
-        return self.sensor.world_visible.view_All_States()
+                
+        pass
 
-    # def generate_Log_Status(list_state):
-    #     now = datetime.now()
-    #     now = now.strftime('%d/%m/%Y_%H:%M:%S')
-    #     log = open('log'+now,'w+')
-    #     log.writelines(str(list_state))
-    #     log.close()
-    #     return "O log foi gerado com sucesso!"
+    
