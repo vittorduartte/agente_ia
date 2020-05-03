@@ -11,7 +11,7 @@
 
 2. Clone o repositório de código:
 
-``git clone https://github.com/vittorduartte/agente_ia``
+``git clone https://github.com/vittorduartte/agent_ai``
 
 3. Na pasta do repositório execute o seguinte comando:
 
